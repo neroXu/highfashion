@@ -22,15 +22,15 @@ public class UserLoginServiceImpl implements UserLoginService {
             if (user.getInputPassword().equalsIgnoreCase(checkCode)) {
                 User existUser = userMapper.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
                 if (StringUtils.isEmpty(existUser)) {
-                    result.setStatus("fail");
+                    result.setStatus(false);
                     result.setMsg("對不起！用户名或密码错误！");
                 } else {
-                    result.setStatus("success");
+                    result.setStatus(true);
                     result.setMsg("恭喜你！登陸成功");
-                    result.setUser(existUser);
+                    //result.setUser(existUser);
                 }
             } else {
-                result.setStatus("fail");
+                result.setStatus(false);
                 result.setMsg("對不起！验证码输入错误！");
             }
         }

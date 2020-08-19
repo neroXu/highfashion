@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
-public class Specification {
+public class Specification implements Serializable{
     private Long id;
 
     private String specName;

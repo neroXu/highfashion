@@ -1,0 +1,26 @@
+{
+  "name" : "ContentCategory",
+  "preName" : "",
+  "comment" : "内容分类",
+  "templateGroupName" : "Default",
+  "fullColumn" : [ {
+    "name" : "id",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "name",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  } ],
+  "pkColumn" : null,
+  "otherColumn" : null,
+  "savePackageName" : "com.hf",
+  "savePath" : "./content-server/src/main/java/com/hf",
+  "saveModelName" : "content-server"
+}

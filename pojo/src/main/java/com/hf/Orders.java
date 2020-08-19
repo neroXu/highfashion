@@ -4,13 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Setter
 @Getter
 @ToString
-public class Orders {
+public class Orders implements Serializable{
     private Long ordersId;
 
     private BigDecimal payment;

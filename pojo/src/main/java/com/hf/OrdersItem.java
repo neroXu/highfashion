@@ -3,11 +3,12 @@ package com.hf;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Setter
 @Getter
-public class OrdersItem {
+public class OrdersItem implements Serializable{
     private Long id;
 
     private Long itemId;

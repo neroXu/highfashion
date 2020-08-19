@@ -3,11 +3,12 @@ package com.hf;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Setter
 @Getter
-public class Seller {
+public class Seller implements Serializable{
     private String sellerId;
 
     private String name;
