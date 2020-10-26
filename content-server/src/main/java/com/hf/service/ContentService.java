@@ -35,7 +35,7 @@ public interface ContentService {
      * @param content 实例对象
      * @return 实例对象
      */
-    Content insert(Content content);
+    void insert(Content content);
 
     /**
      * 修改数据
@@ -43,7 +43,7 @@ public interface ContentService {
      * @param content 实例对象
      * @return 实例对象
      */
-    Content update(Content content);
+    void update(Content content);
 
     /**
      * 通过主键删除数据
@@ -51,11 +51,19 @@ public interface ContentService {
      * @param id 主键
      * @return 是否成功
      */
-    boolean deleteById(Long id);
+    void deleteById(Long id);
 
     /**
      * 查询所有记录
      * @return
      */
     List<Content> findAll();
+
+    /**
+     *
+     * 根据categoryId查询广告
+     * @param categoryId
+     * @return
+     */
+    List<Content> findByCategoryId(Long categoryId);
 }

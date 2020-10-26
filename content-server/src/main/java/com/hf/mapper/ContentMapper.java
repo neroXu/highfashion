@@ -66,4 +66,11 @@ public interface ContentMapper {
      * @return 影响行数
      */
     int deleteById(Long id);
+
+    /**
+     * 根据categoryId查询广告
+     * @param categoryId
+     * @return
+     */
+    List<Content> findByCategoryId(Long categoryId);
 }

@@ -1,16 +1,10 @@
 package com.hf;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Setter
-@Getter
-@ToString
+
 public class Orders implements Serializable{
     private Long ordersId;
 
@@ -62,4 +56,234 @@ public class Orders implements Serializable{
 
     private String sellerId;
 
+    public Long getOrdersId() {
+        return ordersId;
+    }
+
+    public void setOrdersId(Long ordersId) {
+        this.ordersId = ordersId;
+    }
+
+    public BigDecimal getPayment() {
+        return payment;
+    }
+
+    public void setPayment(BigDecimal payment) {
+        this.payment = payment;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public String getPostFee() {
+        return postFee;
+    }
+
+    public void setPostFee(String postFee) {
+        this.postFee = postFee;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getPaymentTime() {
+        return paymentTime;
+    }
+
+    public void setPaymentTime(Date paymentTime) {
+        this.paymentTime = paymentTime;
+    }
+
+    public Date getConsignTime() {
+        return consignTime;
+    }
+
+    public void setConsignTime(Date consignTime) {
+        this.consignTime = consignTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public Date getCloseTime() {
+        return closeTime;
+    }
+
+    public void setCloseTime(Date closeTime) {
+        this.closeTime = closeTime;
+    }
+
+    public String getShippingName() {
+        return shippingName;
+    }
+
+    public void setShippingName(String shippingName) {
+        this.shippingName = shippingName;
+    }
+
+    public String getShippingCode() {
+        return shippingCode;
+    }
+
+    public void setShippingCode(String shippingCode) {
+        this.shippingCode = shippingCode;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getBuyerMessage() {
+        return buyerMessage;
+    }
+
+    public void setBuyerMessage(String buyerMessage) {
+        this.buyerMessage = buyerMessage;
+    }
+
+    public String getBuyerNick() {
+        return buyerNick;
+    }
+
+    public void setBuyerNick(String buyerNick) {
+        this.buyerNick = buyerNick;
+    }
+
+    public String getBuyerRate() {
+        return buyerRate;
+    }
+
+    public void setBuyerRate(String buyerRate) {
+        this.buyerRate = buyerRate;
+    }
+
+    public String getReceiverAreaName() {
+        return receiverAreaName;
+    }
+
+    public void setReceiverAreaName(String receiverAreaName) {
+        this.receiverAreaName = receiverAreaName;
+    }
+
+    public String getReceiverMobile() {
+        return receiverMobile;
+    }
+
+    public void setReceiverMobile(String receiverMobile) {
+        this.receiverMobile = receiverMobile;
+    }
+
+    public String getReceiverZipCode() {
+        return receiverZipCode;
+    }
+
+    public void setReceiverZipCode(String receiverZipCode) {
+        this.receiverZipCode = receiverZipCode;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public Date getExpire() {
+        return expire;
+    }
+
+    public void setExpire(Date expire) {
+        this.expire = expire;
+    }
+
+    public String getInvoiceType() {
+        return invoiceType;
+    }
+
+    public void setInvoiceType(String invoiceType) {
+        this.invoiceType = invoiceType;
+    }
+
+    public String getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType;
+    }
+
+    public String getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "ordersId=" + ordersId +
+                ", payment=" + payment +
+                ", paymentType='" + paymentType + '\'' +
+                ", postFee='" + postFee + '\'' +
+                ", status='" + status + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", paymentTime=" + paymentTime +
+                ", consignTime=" + consignTime +
+                ", endTime=" + endTime +
+                ", closeTime=" + closeTime +
+                ", shippingName='" + shippingName + '\'' +
+                ", shippingCode='" + shippingCode + '\'' +
+                ", userId='" + userId + '\'' +
+                ", buyerMessage='" + buyerMessage + '\'' +
+                ", buyerNick='" + buyerNick + '\'' +
+                ", buyerRate='" + buyerRate + '\'' +
+                ", receiverAreaName='" + receiverAreaName + '\'' +
+                ", receiverMobile='" + receiverMobile + '\'' +
+                ", receiverZipCode='" + receiverZipCode + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", expire=" + expire +
+                ", invoiceType='" + invoiceType + '\'' +
+                ", sourceType='" + sourceType + '\'' +
+                ", sellerId='" + sellerId + '\'' +
+                '}';
+    }
 }

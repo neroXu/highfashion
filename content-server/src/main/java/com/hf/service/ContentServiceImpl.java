@@ -22,6 +22,7 @@ public class ContentServiceImpl implements ContentService {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
     /**
      * 通过ID查询单条数据
      *
@@ -30,15 +31,7 @@ public class ContentServiceImpl implements ContentService {
      */
     @Override
     public Content queryById(Long id) {
-        Content content = (Content) redisTemplate.boundHashOps("content").get(id);
-        if (content==null){
-            System.out.println("从数据库查询");
-            content = contentMapper.queryById(id);
-            redisTemplate.boundHashOps("content").put(id,content);
-        }else {
-            System.out.println("从缓存中查询");
-        }
-        return content;
+        return contentMapper.queryById(id);
     }
 
     /**
@@ -60,9 +53,10 @@ public class ContentServiceImpl implements ContentService {
      * @return 实例对象
      */
     @Override
-    public Content insert(Content content) {
+    public void insert(Content content) {
         this.contentMapper.insert(content);
-        return content;
+        //新增数据后删Redis除缓存
+        redisTemplate.boundHashOps("content").delete(content.getCategoryId());
     }
 
     /**
@@ -72,9 +66,15 @@ public class ContentServiceImpl implements ContentService {
      * @return 实例对象
      */
     @Override
-    public Content update(Content content) {
+    public void update(Content content) {
+        //先去数据库查询旧的categoryId,有缓存就删除
+        Long categoryId = contentMapper.queryById(content.getId()).getCategoryId();
+        redisTemplate.boundHashOps("content").delete(categoryId);
         this.contentMapper.update(content);
-        return this.queryById(content.getId());
+        //如果categoryId发生了变更，删除缓存数据
+        if (categoryId.compareTo(content.getCategoryId())!=0){
+            redisTemplate.boundHashOps("content").delete(content.getCategoryId());
+        }
     }
 
     /**
@@ -84,17 +84,42 @@ public class ContentServiceImpl implements ContentService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Long id) {
-        return this.contentMapper.deleteById(id) > 0;
+    public void deleteById(Long id) {
+        Long categoryId = contentMapper.queryById(id).getCategoryId();
+        redisTemplate.boundHashOps("content").delete(categoryId);
+        this.contentMapper.deleteById(id);
+
     }
 
 
     /**
      * 查询所有
+     *
      * @return
      */
     @Override
     public List<Content> findAll() {
         return contentMapper.findAll();
+    }
+
+    /**
+     * 根据categoryId查询广告
+     *
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<Content> findByCategoryId(Long categoryId) {
+        //去redis中查询是否存在
+        List<Content> list = (List<Content>) redisTemplate.boundHashOps("content").get(categoryId);
+        if (list == null) {
+            System.out.println("从数据库查询数据并放入缓存中");
+            //从数据库读取数据并放入Redis缓存中
+            list = contentMapper.findByCategoryId(categoryId);
+            redisTemplate.boundHashOps("content").put(categoryId, list);
+        } else {
+            System.out.println("从Redis缓存中读取数据");
+        }
+        return list;
     }
 }
