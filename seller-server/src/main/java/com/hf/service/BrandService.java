@@ -1,5 +1,6 @@
 package com.hf.service;
 
+import com.github.pagehelper.PageInfo;
 import com.hf.Brand;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface BrandService {
     void update(Brand brand);
 
     void delete(Integer id);
+
+    List<Brand> findList(Brand brand);
+
+    PageInfo<Brand> findByPage(int page, int size);
 }

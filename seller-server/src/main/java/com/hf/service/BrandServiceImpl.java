@@ -1,5 +1,7 @@
 package com.hf.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hf.Brand;
 import com.hf.mapper.BrandMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +35,22 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public void update(Brand brand) {
-         brandMapper.update(brand);
+        brandMapper.update(brand);
     }
 
     @Override
     public void delete(Integer id) {
-         brandMapper.delete(id);
+        brandMapper.delete(id);
+    }
+
+    @Override
+    public List<Brand> findList(Brand brand) {
+        return brandMapper.findList(brand);
+    }
+
+    @Override
+    public PageInfo<Brand> findByPage(int page, int size) {
+        PageHelper.startPage(page, size);
+        return new PageInfo<Brand>(brandMapper.findAll());
     }
 }

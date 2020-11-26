@@ -1,0 +1,64 @@
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]': # 匹配所有请求
+              allowedOrigins: "*" #跨域处理 允许所有的域
+              allowedMethods: # 支持的方法
+                - GET
+                - POST
+                - PUT
+                - DELETE
+      routes:
+            #卖家微服务
+            - id: highfashion_seller_route
+              #uri: http://localhost:8002
+              #lb:负载均衡
+              uri: lb://seller-server
+              predicates:
+              - Path=/brand/**,/specification/**
+              filters:
+              #- StripPrefix=1
+              - name: RequestRateLimiter #请求数限流 名字不能随便写 ，使用默认的facatory
+                args:
+                  key-resolver: "#{@ipKeyResolver}"
+                  #每秒允许一个请求
+                  redis-rate-limiter.replenishRate: 1
+                  #支持并发数量
+                  redis-rate-limiter.burstCapacity: 4
+
+            #用户微服务
+            - id: highfashion_user_route
+              uri: lb://user
+              predicates:
+              - Path=/api/user/**
+              filters:
+              - StripPrefix=1
+            #广告微服务
+            - id: highfashion_content_route
+              uri: lb://content
+              predicates:
+              - Path=/api/content/**
+              filters:
+                ## 截取路径位数
+              - StripPrefix=1
+
+  application:
+    name: gateway
+
+server:
+  port: 9001
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8000/eureka
+  instance:
+    prefer-ip-address: true
+management:
+  endpoint:
+    gateway:
+      enabled: true
+    web:
+      exposure:
+        include: true

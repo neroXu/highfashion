@@ -1,15 +1,14 @@
 package com.hf.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hf.Brand;
 import com.hf.Result;
 import com.hf.service.BrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,19 +24,19 @@ public class HFBrandController {
     @Autowired
     private BrandService brandService;
 
-    @RequestMapping(value = "/findAll",method = RequestMethod.GET)
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     @ApiOperation(value = "获取所有品牌")
     public List<Brand> findAll() {
         return brandService.findAll();
     }
 
-    @RequestMapping(value = "/findById",method = RequestMethod.GET)
+    @RequestMapping(value = "/findById", method = RequestMethod.GET)
     @ApiOperation(value = "根据id获取某个品牌")
     public Brand findById(@PathVariable Integer id) {
         return brandService.findById(id);
     }
 
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ApiOperation(value = "新增一个品牌")
     public Result save(Brand brand) {
         try {
@@ -49,7 +48,7 @@ public class HFBrandController {
         }
     }
 
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ApiOperation(value = "修改品牌")
     public Result update(Brand brand) {
         try {
@@ -61,7 +60,7 @@ public class HFBrandController {
         }
     }
 
-    @RequestMapping(value = "/delete",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除品牌")
     public Result delete(Integer id) {
         try {
@@ -71,5 +70,19 @@ public class HFBrandController {
             e.printStackTrace();
             return new Result(true, "删除失败！");
         }
+    }
+
+    @RequestMapping(value = "/findList", method = RequestMethod.POST)
+    @ApiOperation(value = "按条件查询品牌")
+    public List<Brand> findList(@RequestBody Brand brand) {
+        return brandService.findList(brand);
+
+    }
+
+    @RequestMapping(value = "/findByPage/{page}/{size}", method = RequestMethod.GET)
+    @ApiOperation(value = "分页查询品牌")
+    public PageInfo<Brand> findByPage(@PathVariable int page, @PathVariable int size) {
+        return brandService.findByPage(page,size);
+
     }
 }

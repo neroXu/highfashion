@@ -10,7 +10,7 @@ import java.util.List;
 public interface BrandMapper {
 
     @Select("select * from brand")
-    @Results(id = "brandMap",value = {@Result(property = "firstChar",column = "first_char")})
+    @Results(id = "brandMap", value = {@Result(property = "firstChar", column = "first_char")})
     List<Brand> findAll();
 
     @Select("select * from brand where id=#{id}")
@@ -28,4 +28,13 @@ public interface BrandMapper {
     @Delete("delete from brand where id=#{id}")
     @ResultMap("brandMap")
     void delete(Integer id);
+
+    @Select("<script> SELECT * from brand" +
+            "<where>"+
+            "<if test='name != null'>and name like CONCAT('%',#{name},'%') </if> "+
+            " <if test='firstChar != null'>and first_char like CONCAT('%',#{firstChar},'%') </if> "+
+            "</where>"+
+            "</script>")
+    @ResultMap("brandMap")
+    List<Brand> findList(Brand brand);
 }

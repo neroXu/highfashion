@@ -18,22 +18,7 @@ public class UserLoginServiceImpl implements UserLoginService {
     @Override
     public Result userLogin(User user, String checkCode) {
         Result result = new Result();
-        if (!StringUtils.isEmpty(user) && user.getInputPassword() != null) {
-            if (user.getInputPassword().equalsIgnoreCase(checkCode)) {
-                User existUser = userMapper.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
-                if (StringUtils.isEmpty(existUser)) {
-                    result.setStatus(false);
-                    result.setMsg("對不起！用户名或密码错误！");
-                } else {
-                    result.setStatus(true);
-                    result.setMsg("恭喜你！登陸成功");
-                    //result.setUser(existUser);
-                }
-            } else {
-                result.setStatus(false);
-                result.setMsg("對不起！验证码输入错误！");
-            }
-        }
+
         return result;
     }
 

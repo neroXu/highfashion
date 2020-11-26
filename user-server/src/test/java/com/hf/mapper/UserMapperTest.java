@@ -28,15 +28,5 @@ public class UserMapperTest {
         System.out.println(user);
     }
 
-    @Test
-    public void insert() throws Exception {
-        User user = new User();
-        user.setAge(20);
-        user.setUsername("fff");
-        user.setPassword("123");
-        user.setSex("男");
-        user.setNickname("monkey");
-        userMapper.insert(user);
-    }
 
 }
