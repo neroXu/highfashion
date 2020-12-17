@@ -30,11 +30,11 @@ spring:
 
             #用户微服务
             - id: highfashion_user_route
-              uri: lb://user
+              uri: lb://user-server
               predicates:
-              - Path=/api/user/**
-              filters:
-              - StripPrefix=1
+              - Path=/user/**
+              #filters:
+              #- StripPrefix=1
             #广告微服务
             - id: highfashion_content_route
               uri: lb://content

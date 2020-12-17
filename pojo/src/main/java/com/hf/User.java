@@ -1,6 +1,7 @@
 package com.hf;
 
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,8 +12,10 @@ import java.util.Date;
 public class User implements Serializable{
     private Long id;
 
+    @NotBlank
     private String username;
 
+    @NotBlank
     private String password;
 
     private String phone;

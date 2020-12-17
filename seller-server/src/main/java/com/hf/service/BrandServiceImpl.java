@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Machenike-Pc on 2020/4/19.
+ * Created by Mechanize-Pc on 2020/4/19.
  */
 @Service
 public class BrandServiceImpl implements BrandService {
